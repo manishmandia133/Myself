@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     /* ----------------------------------------------------
-       1. Cursor Tracking with requestAnimationFrame for Zero Lag
+    1. Cursor Tracking with requestAnimationFrame for Zero Lag
     ---------------------------------------------------- */
     const heroSection = document.getElementById('hero');
     const root = document.documentElement;
@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentY = targetY;
 
     // Dynamic Radius variables
-    let baseRadius = 150;
-    let currentRadius = 150;
+    let baseRadius = 112;
+    let currentRadius = 112;
     let lastX = currentX;
     let lastY = currentY;
 

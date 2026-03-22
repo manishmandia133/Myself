@@ -5,6 +5,9 @@
     --font-primary: 'Inter', sans-serif;
     --font-heading: 'Space Grotesk', sans-serif;
 
+    --x: 40vw;
+    --y: 40vh;
+
     --transition-duration: 0.6s;
     --premium-bezier: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -129,7 +132,7 @@ section{
 .bg-light {
     color: #000;
     /* Circle size is dynamically driven by JS now based on speed and random interval base */
-    clip-path: circle(var(--cursor-radius, 150px) at var(--x) var(--y));
+    clip-path: circle(var(--cursor-radius, 100px) at var(--x) var(--y));
     pointer-events: none;
     z-index: 5;
     /* Removed transition since requestAnimationFrame and lerp provide perfectly synchronized interpolation frame by frame */
