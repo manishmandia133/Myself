@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     requestAnimationFrame(raf);
 
+<<<<<<< HEAD
     /* ============================================================
        1. LOADING SCREEN — Letter reveal + progress bar, then hide
        ============================================================ */
@@ -127,6 +128,110 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setFooterHeight();
     window.addEventListener('resize', setFooterHeight);
+=======
+    if (heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        });
+    }
+
+    /* ----------------------------------------------------
+    2. Parallax effect for hero layers
+    ---------------------------------------------------- */
+    if (heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const layers = document.querySelectorAll('.hero-layer');
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+            layers[0].style.transform = `translate(${x}px, ${y}px)`;
+            layers[1].style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
+        });
+    }
+
+    /* ----------------------------------------------------
+    3. 3D Premium Tilt Effect with Dynamic Glow on Work Cards
+    ---------------------------------------------------- */
+    const workCards = document.querySelectorAll('.work-card');
+
+    workCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            // Subtle 10 degree max rotation for premium feel
+            const rotateX = ((y - centerY) / centerY) * -10;
+            const rotateY = ((x - centerX) / centerX) * 10;
+
+            // Dynamic glow position follows cursor (in percentage)
+            const glowX = (x / rect.width) * 100;
+            const glowY = (y / rect.height) * 100;
+
+            // Apply transform
+            card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            
+            // Set CSS custom properties for dynamic glow positioning
+            card.style.setProperty('--mouse-x', `${glowX}%`);
+            card.style.setProperty('--mouse-y', `${glowY}%`);
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+        });
+
+        card.addEventListener('mouseenter', () => {
+            card.style.transition = 'none';
+        });
+    });
+
+    /* ----------------------------------------------------
+    4. Big Words Scroll Animation
+    ---------------------------------------------------- */
+    const bigWordsSection = document.querySelector('.big-words-section');
+    if (bigWordsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const words = entry.target.querySelectorAll('.big-words-row span');
+                    words.forEach((word, index) => {
+                        setTimeout(() => {
+                            word.style.opacity = word.classList.contains('-highlighted') ? '1' : '0.15';
+                            word.style.transform = 'translateY(0)';
+                        }, index * 50);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(bigWordsSection);
+    }
+
+    /* ----------------------------------------------------
+    5. Initialize Locomotive Scroll (if available)
+    ---------------------------------------------------- */
+    if (typeof LocomotiveScroll !== 'undefined') {
+        try {
+            const scroll = new LocomotiveScroll({
+                el: document.querySelector('#main'),
+                smooth: true,
+                tablet: true
+            });
+        } catch (e) {
+            console.log('Locomotive Scroll not fully loaded, using native scroll');
+        }
+    }
+
+    /* ----------------------------------------------------
+    6. Stats counter animation with CHD style
+    ---------------------------------------------------- */
+    const statBoxes = document.querySelectorAll('.stat-box');
+>>>>>>> b27009903b7e08f6bbce284e1f20a98da1ad7440
 
     /* ============================================================
        5. SMOOTH SCROLL — Nav link click (uses Lenis)
@@ -259,4 +364,28 @@ document.addEventListener('DOMContentLoaded', () => {
         s.style.background = '#000';
     });
 
+<<<<<<< HEAD
+=======
+    window.addEventListener('scroll', animateStats);
+    animateStats(); // Check on load
+
+    /* ----------------------------------------------------
+    7. Magnetic cursor effect for buttons and links
+    ---------------------------------------------------- */
+    const magneticElements = document.querySelectorAll('.btn, .contact-link, .chd-link');
+    
+    magneticElements.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            el.style.transform = 'translate(0, 0)';
+        });
+    });
+>>>>>>> b27009903b7e08f6bbce284e1f20a98da1ad7440
 });
