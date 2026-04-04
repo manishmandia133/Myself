@@ -9,7 +9,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="home_style.css">
 </head>
@@ -55,11 +55,17 @@
 
         <!-- ====== HERO ====== -->
         <section class="o-hero" id="hero">
+            <!-- Dual-layer background: base always visible, reveal follows cursor -->
             <figure class="o-hero_bg">
-                <img src="assets/user_foreground.png" alt="Manish Mandia">
+                <div class="o-hero_bg_base">
+                    <img src="assets/user_foreground.png" alt="Manish Mandia">
+                </div>
+                <div class="o-hero_bg_reveal">
+                    <img src="assets/user_background.jpg" alt="Manish Mandia Reveal">
+                </div>
             </figure>
             <div class="o-hero_content">
-                <h1 class="o-hero_title" data-split>
+                <h1 class="o-hero_title" id="hero-title">
                     <span class="o-hero_line">I Build The</span>
                     <span class="o-hero_line">Quiet Space</span>
                 </h1>
@@ -173,34 +179,86 @@
             </div>
         </section>
 
-        <!-- ====== JOURNEY / TIMELINE ====== -->
+        <!-- ====== JOURNEY / PREMIUM TIMELINE ====== -->
         <section class="o-journey" id="journey" data-scroll-section>
             <div class="row">
                 <div class="o-journey_label col-24 lg-col-4" data-scroll-reveal>
-                    <span class="section-label">Journey</span>
+                    <span class="section-label" style="color:rgba(255,255,255,0.4)">Journey</span>
                 </div>
                 <div class="o-journey_title col-24 lg-col-19" data-scroll-reveal>
-                    <h2 class="tx-xl" data-split-lines>My Path</h2>
+                    <h2 class="tx-xl" style="color:#fff">My Path</h2>
                 </div>
             </div>
-            <div class="row o-journey_items">
-                <div class="o-journey_item col-24 lg-col-18 lg-off-4" data-scroll-reveal>
-                    <div class="o-journey_year">2024</div>
-                    <div class="o-journey_role">Senior UI Developer</div>
-                    <div class="o-journey_company">Tech Company</div>
-                    <p class="o-journey_desc">Leading frontend development and design systems. Architecting scalable UI solutions and mentoring junior developers.</p>
+
+            <!-- Premium Timeline -->
+            <div class="o-timeline">
+                <!-- Animated vertical line -->
+                <div class="o-timeline_line">
+                    <div class="o-timeline_line_fill"></div>
                 </div>
-                <div class="o-journey_item col-24 lg-col-18 lg-off-4" data-scroll-reveal>
-                    <div class="o-journey_year">2022</div>
-                    <div class="o-journey_role">UI Developer</div>
-                    <div class="o-journey_company">Digital Agency</div>
-                    <p class="o-journey_desc">Built responsive web applications for clients across e-commerce, finance, and healthcare sectors.</p>
-                </div>
-                <div class="o-journey_item col-24 lg-col-18 lg-off-4" data-scroll-reveal>
-                    <div class="o-journey_year">2020</div>
-                    <div class="o-journey_role">Junior Developer</div>
-                    <div class="o-journey_company">Startup</div>
-                    <p class="o-journey_desc">Started journey in frontend development. Learned modern frameworks and best practices.</p>
+
+                <div class="o-timeline_items">
+
+                    <!-- Item 1 -->
+                    <div class="o-timeline_item">
+                        <div class="o-timeline_year">2024</div>
+                        <div class="o-timeline_dot"></div>
+                        <div class="o-timeline_card">
+                            <div class="o-timeline_card_inner">
+                                <div class="o-timeline_card_header">
+                                    <div class="o-timeline_card_role">Senior UI Developer</div>
+                                    <div class="o-timeline_card_company">Tech Company</div>
+                                </div>
+                                <p class="o-timeline_card_desc">Leading frontend development and design systems. Architecting scalable UI solutions and mentoring junior developers.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="o-timeline_item">
+                        <div class="o-timeline_year">2022</div>
+                        <div class="o-timeline_dot"></div>
+                        <div class="o-timeline_card">
+                            <div class="o-timeline_card_inner">
+                                <div class="o-timeline_card_header">
+                                    <div class="o-timeline_card_role">UI Developer</div>
+                                    <div class="o-timeline_card_company">Digital Agency</div>
+                                </div>
+                                <p class="o-timeline_card_desc">Built responsive web applications for clients across e-commerce, finance, and healthcare sectors.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="o-timeline_item">
+                        <div class="o-timeline_year">2020</div>
+                        <div class="o-timeline_dot"></div>
+                        <div class="o-timeline_card">
+                            <div class="o-timeline_card_inner">
+                                <div class="o-timeline_card_header">
+                                    <div class="o-timeline_card_role">Junior Developer</div>
+                                    <div class="o-timeline_card_company">Startup</div>
+                                </div>
+                                <p class="o-timeline_card_desc">Started the journey in frontend development. Learned modern frameworks and best practices working on live products.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="o-timeline_item">
+                        <div class="o-timeline_year">2018</div>
+                        <div class="o-timeline_dot"></div>
+                        <div class="o-timeline_card">
+                            <div class="o-timeline_card_inner">
+                                <div class="o-timeline_card_header">
+                                    <div class="o-timeline_card_role">CS Graduate</div>
+                                    <div class="o-timeline_card_company">University</div>
+                                </div>
+                                <p class="o-timeline_card_desc">Graduated with a focus on software engineering. Developed a strong foundation in algorithms, data structures, and web fundamentals.</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
