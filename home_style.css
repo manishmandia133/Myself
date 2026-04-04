@@ -899,4 +899,154 @@ button { border: 0; background: none; cursor: pointer; font: inherit; color: inh
    ============================================================ */
 @media (hover: hover) and (any-pointer: fine) {
     .o-works_card:hover { transform: translateY(-1rem); }
+    body { cursor: none; }
+}
+
+/* ============================================================
+   NOOMO-STYLE HERO TITLE — Outfit 900, full-width spread
+   ============================================================ */
+.o-hero_title {
+    font-family: 'Outfit', var(--font-display), sans-serif;
+    font-weight: 900;
+    font-size: clamp(9rem, 17vw, 25rem);
+    line-height: 0.86;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin: 0;
+    width: 100%;
+}
+.o-hero_title-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+}
+.o-hero_title-line.-single { justify-content: flex-start; }
+
+/* Each word clips individually for the slide-up reveal */
+.o-hero_line {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 0.92;
+}
+.o-hero_line_inner {
+    display: inline-block;
+    transform: translateY(108%);
+    transition: transform 1.2s var(--ease-smooth);
+}
+.is-loaded .o-hero_line_inner { transform: translateY(0); }
+
+/* Stagger per word */
+.o-hero_title-line:nth-child(1) .o-hero_line:nth-child(1) .o-hero_line_inner { transition-delay: 0.00s; }
+.o-hero_title-line:nth-child(1) .o-hero_line:nth-child(2) .o-hero_line_inner { transition-delay: 0.07s; }
+.o-hero_title-line:nth-child(2) .o-hero_line:nth-child(1) .o-hero_line_inner { transition-delay: 0.14s; }
+.o-hero_title-line:nth-child(2) .o-hero_line:nth-child(2) .o-hero_line_inner { transition-delay: 0.21s; }
+.o-hero_title-line:nth-child(3) .o-hero_line .o-hero_line_inner             { transition-delay: 0.29s; }
+
+/* ============================================================
+   GLASS ORBS — atmospheric colour blobs in hero
+   ============================================================ */
+@keyframes floatOrb {
+    0%,  100% { transform: translateY(0px)   translateX(0px)   scale(1);    }
+    33%        { transform: translateY(-28px) translateX(14px)  scale(1.04); }
+    66%        { transform: translateY(14px)  translateX(-10px) scale(0.97); }
+}
+.o-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    will-change: transform;
+}
+.o-orb--1 {
+    width: 520px; height: 520px;
+    top: 50%; left: 42%;
+    transform: translate(-50%, -55%);
+    background: radial-gradient(ellipse at 35% 35%,
+        rgba(130, 90, 255, 0.26) 0%,
+        rgba(70, 110, 255, 0.13) 45%,
+        transparent 70%);
+    filter: blur(90px);
+    animation: floatOrb 9s ease-in-out infinite;
+}
+.o-orb--2 {
+    width: 360px; height: 360px;
+    top: 20%; right: 15%;
+    background: radial-gradient(ellipse at 40% 40%,
+        rgba(255, 80, 110, 0.22) 0%,
+        rgba(255, 130, 70, 0.11) 45%,
+        transparent 70%);
+    filter: blur(70px);
+    animation: floatOrb 11s ease-in-out infinite 2.5s reverse;
+}
+.o-orb--3 {
+    width: 290px; height: 290px;
+    bottom: 18%; left: 22%;
+    background: radial-gradient(ellipse at 50% 35%,
+        rgba(50, 190, 255, 0.22) 0%,
+        rgba(70, 130, 220, 0.11) 45%,
+        transparent 70%);
+    filter: blur(60px);
+    animation: floatOrb 13s ease-in-out infinite 5s;
+}
+
+/* ============================================================
+   CUSTOM CURSOR — lerped dot + expanding ring
+   ============================================================ */
+.c-cursor {
+    position: fixed;
+    left: 0; top: 0;
+    pointer-events: none;
+    z-index: 9997;
+    will-change: left, top;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.c-cursor.is-visible { opacity: 1; }
+.c-cursor-dot {
+    position: absolute;
+    width: 7px; height: 7px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), opacity 0.3s;
+}
+.c-cursor-ring {
+    position: absolute;
+    width: 36px; height: 36px;
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.45s var(--ease-out), height 0.45s var(--ease-out),
+                border-color 0.45s var(--ease-out), opacity 0.3s;
+}
+.c-cursor.-hover .c-cursor-dot  { width: 4px; height: 4px; opacity: 0.4; }
+.c-cursor.-hover .c-cursor-ring { width: 64px; height: 64px; border-color: #fff; }
+.c-cursor.-click .c-cursor-ring { width: 22px; height: 22px; }
+@media (max-width: 960px) { .c-cursor { display: none; } }
+
+/* ============================================================
+   FILM GRAIN — animated SVG noise overlay
+   ============================================================ */
+.c-grain {
+    position: fixed;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    pointer-events: none;
+    z-index: 9996;
+    opacity: 0.038;
+    animation: grainShift 0.16s steps(1) infinite;
+}
+@keyframes grainShift {
+    0%   { transform: translate(0%,    0%  ); }
+    10%  { transform: translate(-4%,  -8%  ); }
+    20%  { transform: translate(-13%,  4%  ); }
+    30%  { transform: translate( 6%,  -22% ); }
+    40%  { transform: translate(-4%,   22% ); }
+    50%  { transform: translate(-13%,  8%  ); }
+    60%  { transform: translate( 13%,  0%  ); }
+    70%  { transform: translate( 0%,   13% ); }
+    80%  { transform: translate( 2%,   30% ); }
+    90%  { transform: translate(-8%,   8%  ); }
+    100% { transform: translate( 0%,   0%  ); }
 }

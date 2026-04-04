@@ -287,4 +287,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
     timelineItems.forEach(it => tlCardObserver.observe(it));
 
+    /* ============================================================
+       14. CUSTOM CURSOR — two-element lerped cursor
+       ============================================================ */
+    const cursorEl   = document.getElementById('js-cursor');
+    const cursorDot  = cursorEl?.querySelector('.c-cursor-dot');
+    const cursorRing = cursorEl?.querySelector('.c-cursor-ring');
+
+    if (cursorEl && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        let tx = -100, ty = -100; // target
+        let dx = -100, dy = -100; // dot (instant)
+        let rx = -100, ry = -100; // ring (lagged)
+
+        document.addEventListener('mousemove', (e) => {
+            tx = e.clientX;
+            ty = e.clientY;
+            cursorEl.classList.add('is-visible');
+        });
+
+        (function animateCursor() {
+            // Dot follows instantly
+            dx = tx; dy = ty;
+            // Ring lerps
+            rx += (tx - rx) * 0.14;
+            ry += (ty - ry) * 0.14;
+
+            if (cursorDot)  { cursorDot.style.left  = dx + 'px'; cursorDot.style.top  = dy + 'px'; }
+            if (cursorRing) { cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; }
+
+            requestAnimationFrame(animateCursor);
+        })();
+
+        // Hover state
+        const hoverTargets = 'a, button, .o-expertise_item, .o-works_card, .o-timeline_card_inner, .o-contact_link';
+        document.querySelectorAll(hoverTargets).forEach(el => {
+            el.addEventListener('mouseenter', () => cursorEl.classList.add('-hover'));
+            el.addEventListener('mouseleave', () => cursorEl.classList.remove('-hover'));
+        });
+
+        // Click state
+        document.addEventListener('mousedown', () => cursorEl.classList.add('-click'));
+        document.addEventListener('mouseup',   () => cursorEl.classList.remove('-click'));
+
+        // Hide when leaving window
+        document.addEventListener('mouseleave', () => cursorEl.classList.remove('is-visible'));
+        document.addEventListener('mouseenter', () => cursorEl.classList.add('is-visible'));
+    }
+
+    /* ============================================================
+       15. ORB MOUSE PARALLAX — hero blobs follow cursor depth
+       ============================================================ */
+    const orbs = document.querySelectorAll('.o-orb');
+
+    if (heroSection && orbs.length) {
+        let orbTargetX = 0, orbTargetY = 0;
+        let orbCurrX   = 0, orbCurrY   = 0;
+
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            orbTargetX = (e.clientX - rect.width  / 2) / rect.width;
+            orbTargetY = (e.clientY - rect.height / 2) / rect.height;
+        });
+        heroSection.addEventListener('mouseleave', () => {
+            orbTargetX = 0; orbTargetY = 0;
+        });
+
+        (function animateOrbs() {
+            orbCurrX += (orbTargetX - orbCurrX) * 0.06;
+            orbCurrY += (orbTargetY - orbCurrY) * 0.06;
+            orbs.forEach((orb, i) => {
+                const factor = (i + 1) * 22;
+                const dir    = i % 2 === 0 ? 1 : -1;
+                orb.style.marginLeft = `${orbCurrX * factor * dir}px`;
+                orb.style.marginTop  = `${orbCurrY * factor * dir}px`;
+            });
+            requestAnimationFrame(animateOrbs);
+        })();
+    }
+
 });

@@ -9,11 +9,26 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="home_style.css">
 </head>
 <body>
+
+    <!-- =================== CUSTOM CURSOR =================== -->
+    <div class="c-cursor" id="js-cursor">
+        <div class="c-cursor-dot"></div>
+        <div class="c-cursor-ring"></div>
+    </div>
+
+    <!-- =================== FILM GRAIN =================== -->
+    <svg class="c-grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <filter id="c-grain-noise" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="4" stitchTiles="stitch"/>
+            <feColorMatrix type="saturate" values="0"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#c-grain-noise)"/>
+    </svg>
 
     <!-- =================== LOADER =================== -->
     <div class="o-loader" id="js-loader">
@@ -64,17 +79,30 @@
                     <img src="assets/user_background.jpg" alt="Manish Mandia Reveal">
                 </div>
             </figure>
+
+            <!-- Atmospheric glass orbs -->
+            <div class="o-orb o-orb--1"></div>
+            <div class="o-orb o-orb--2"></div>
+            <div class="o-orb o-orb--3"></div>
+
+            <!-- Noomo-style edge-to-edge spread title -->
             <div class="o-hero_content">
                 <h1 class="o-hero_title" id="hero-title">
-                    <span class="o-hero_line">I Build The</span>
-                    <span class="o-hero_line">Quiet Space</span>
-                </h1>
-                <div class="o-hero_subtitle">
-                    <div class="u-lineWrapper">
-                        <span class="u-line">Where function and beauty meet.</span>
+                    <div class="o-hero_title-line">
+                        <span class="o-hero_line">I</span>
+                        <span class="o-hero_line">BUILD</span>
                     </div>
-                </div>
+                    <div class="o-hero_title-line">
+                        <span class="o-hero_line">THE</span>
+                        <span class="o-hero_line">QUIET</span>
+                    </div>
+                    <div class="o-hero_title-line -single">
+                        <span class="o-hero_line">SPACE.</span>
+                    </div>
+                </h1>
             </div>
+
+            <!-- Bottom info strip -->
             <div class="o-hero_footer">
                 <div class="o-hero_footerLeft">
                     <div class="u-lineWrapper">
@@ -89,7 +117,10 @@
                 </div>
                 <div class="o-hero_footerRight">
                     <div class="u-lineWrapper">
-                        <span class="u-line">Frontend Engineer</span>
+                        <span class="u-line">Where function</span>
+                    </div>
+                    <div class="u-lineWrapper">
+                        <span class="u-line">and beauty meet.</span>
                     </div>
                 </div>
             </div>
